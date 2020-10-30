@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="article-metadata text-center">
+    <h1 class="mb-3 mt-2 display-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+    {% for post in posts %}
+      <h2><a href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+      <p>{{ post.content }}</p>
+      <small class="text-muted">
+      <a class="mr-2" href="{% url 'user-posts' post.author.username %}">Posted by {{ post.author }}</a>
+      </small>
+      <small class="text-muted">On {{ post.date_posted }}</small>
+    {% endfor %}
+  </div>
+</div>
+
+<nav aria-label="...">
+<ul class="pagination justify-content-center mt-3">
+  {% if is_paginated %}
+    {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+      <li class="page-item"><a class="page-link" href="{{ page_obj.previous_page_number }}">Previous</a></li>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+      <li class="page-item"><a class="page-link" href="?page{{ page_obj.paginator.num_pages }}">Last</a></li>
+    {% endif %}
+
+  {% endif %}
+  </ul>
+  </nav>
+{% endblock %}

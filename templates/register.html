@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="POST" action="{% url 'register' %}">
+    {% csrf_token %}
+    {% if form.errors %}
+        <div class="alert alert-danger mt-3" role="alert">
+            {% for field in form %}
+                {% if field.errors %}
+                    {{ field.errors }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endif %}
+    <fieldset class="form-group mt-3">
+        {{ form|crispy }}
+    </fieldset>
+        <input type="submit" value="Register" class="mb-3 btn btn-outline-primary btn-block">
+    </form>
+    <!-- <div class="border-top pt-3">
+        <small class="text-muted">
+            Already have an account?<a class="ml-2" href="{% url 'login' %}">Login here</a>
+        </small>
+    </div> -->
+
+{% endblock %}

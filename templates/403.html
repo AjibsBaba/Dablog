@@ -1,0 +1,56 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Error 404!</title>
+    <link rel="stylesheet" href="{% static 'fonts.css' %}">
+<style>
+    .error2 {
+        font-family: 'Montserrat', sans-serif;
+        justify-content: center;
+        display: grid;
+        margin-top: 175px;
+        text-align: center;
+        align-content: center;
+        font-size: 18px;
+    }
+
+    .button:hover {
+        color: white;
+        background: #ff6300;
+        
+    }
+
+    .button {
+        -webkit-transition-duration: 0.4s;
+        transition-duration: 0.4s;
+        background-color: #ff6300;
+        border: none;
+        color: white;
+        padding: 12px 28px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border-radius: 4px;
+    }
+</style>
+</head>
+<body>
+
+<div class="error2">
+    <h1 class="head1">
+        Oops!
+    </h1>
+    <h2 class="head2">
+        403 Access Forbidden
+    </h2>
+    <a class="button" href="{% url 'index' %}">Go to Homepage</a>
+</div>
+</body>
+</html>
+{% endblock content %}

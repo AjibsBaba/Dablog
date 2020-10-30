@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="d-flex justify-content-between">
+        <img class="img-thumbnail rounded mt-1" src="{{ user.profile.image.url }}">
+        <h1 class="display-4 mt-5 text-uppercase">{{ user.username }}'s Profile</h1>
+        <h4 class="text-uppercase">{{ user.email }}</h4>
+        <p class="text-secondary">{{ user.profile.nationality }}</p>
+
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+            <fieldset class="form-group mt-1">
+                {{ u_form|crispy }}
+                {{ p_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info btn-block" type="submit">Update</button>
+            </div>
+    </form>
+    
+    
+{% endblock %}
